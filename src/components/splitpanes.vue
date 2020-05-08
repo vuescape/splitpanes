@@ -16,6 +16,10 @@ export default {
     dblClickSplitter: {
       type: Boolean,
       default: true
+    },
+    circularReferencePropertyExclusions: {
+      type: Array,
+      default: () => []
     }
   },
   data: () => ({
@@ -369,7 +373,8 @@ export default {
           '$refs', '$slots', '$scopedSlots', '$vnode', '_data', '__vue__',
           '_self', '_vnode', '_watcher', '_watchers', '_computedWatchers', '_renderProxy', 'vnodes',
           'container', 'Ctor', 'context', 'parent', 'componentInstance', 'componentOptions',
-          'fnContext', 'fnOptions']
+          'fnContext', 'fnOptions',
+          ...this.circularReferencePropertyExclusions]
 
         const slotsExport = JSON.stringify(this.$slots.default, (name, val) => {
           // Discard the properties listed in array to prevent circular reference.
